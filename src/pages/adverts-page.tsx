@@ -1,14 +1,15 @@
 import { getLatestAdverts } from "../api/service";
 import { useEffect, useState } from "react";
 import type { Advert } from "../api/types";
-import { logout } from "../auth/service";
+import Layout from "../components/layout";
 
 interface AdvertsPageProps {
   // active: boolean;
+  isLogged: boolean;
   onLogout: () => void;
 }
 
-function AdvertPage({ onLogout }: AdvertsPageProps) {
+function AdvertPage({ ...rest }: AdvertsPageProps) {
   const [adverts, setAdverts] = useState<Advert[]>([]);
 
   useEffect(() => {
@@ -19,28 +20,23 @@ function AdvertPage({ onLogout }: AdvertsPageProps) {
     getAdverts();
   }, []);
 
-  const handleLogoutClock = async () => {
-    await logout();
-    onLogout();
-  };
-
   return (
-    <div>
-      <h1>Anuncios disponibles</h1>
-      <ul>
-        {adverts.map((ad) => (
-          <li key={ad.id}>
-            <strong>{ad.name}</strong> - {ad.price}€
-            <span>
-              {ad.sale ? "En venta" : "Se compra"} | Tags: {ad.tags.join(", ")}
-            </span>
-          </li>
-        ))}
-      </ul>
-      <button disabled={false} onClick={handleLogoutClock}>
-        Logout
-      </button>
-    </div>
+    <Layout title="What are you thinking?!" {...rest}>
+      <div>
+        <h1>Anuncios disponibles</h1>
+        <ul>
+          {adverts.map((ad) => (
+            <li key={ad.id}>
+              <strong>{ad.name}</strong> - {ad.price}€
+              <span>
+                {ad.sale ? "En venta" : "Se compra"} | Tags:{" "}
+                {ad.tags.join(", ")}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </Layout>
   );
 }
 
