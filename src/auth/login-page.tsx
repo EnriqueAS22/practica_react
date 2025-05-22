@@ -1,9 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { login } from "./service";
-import { AuthContext } from "./context";
+import { useAuth } from "./context";
 
 function LoginPage() {
-  const { onLogin } = useContext(AuthContext);
+  const { onLogin } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "user@mail.com",
     password: "1234",
