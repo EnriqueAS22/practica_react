@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import storage from "./utils/storage.ts";
 import { setAuthorizationHeader } from "./api/client.ts";
 import AuthProvider from "./auth/auth-provider.tsx";
+import { BrowserRouter } from "react-router";
 
 const accessToken = storage.get("auth");
 if (accessToken) {
@@ -13,7 +14,9 @@ if (accessToken) {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider defaultIsLogged={!!accessToken}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </AuthProvider>
   </StrictMode>
 );

@@ -1,7 +1,7 @@
 import { getLatestAdverts } from "../api/service";
 import { useEffect, useState } from "react";
 import type { Advert } from "../api/types";
-import Layout from "../components/layout";
+import Page from "../components/page";
 
 /* 
 interface AdvertsPageProps {
@@ -21,7 +21,7 @@ function AdvertPage() {
   }, []);
 
   return (
-    <Layout title="What are you thinking?!">
+    <Page title="What are you thinking?!">
       <div>
         <h1>Anuncios disponibles</h1>
         <ul>
@@ -36,7 +36,7 @@ function AdvertPage() {
           ))}
         </ul>
       </div>
-    </Layout>
+    </Page>
   );
 }
 
