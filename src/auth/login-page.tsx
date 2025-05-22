@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { login } from "./service";
+import { AuthContext } from "./context";
 
-interface LoginPageProps {
-  onLogin: () => void;
-}
-
-function LoginPage({ onLogin }: LoginPageProps) {
+function LoginPage() {
+  const { onLogin } = useContext(AuthContext);
   const [credentials, setCredentials] = useState({
     email: "user@mail.com",
     password: "1234",

@@ -1,11 +1,9 @@
+import { useContext } from "react";
 import { logout } from "../auth/service";
+import { AuthContext } from "../auth/context";
 
-export interface HeaderProps {
-  isLogged: boolean;
-  onLogout: () => void;
-}
-
-function Header({ isLogged, onLogout }: HeaderProps) {
+function Header() {
+  const { isLogged, onLogout } = useContext(AuthContext);
   const handleLogoutClock = async () => {
     await logout();
     onLogout();

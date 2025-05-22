@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import type { Advert } from "../api/types";
 import Layout from "../components/layout";
 
+/* 
 interface AdvertsPageProps {
-  // active: boolean;
-  isLogged: boolean;
-  onLogout: () => void;
-}
+  active: boolean;
+} 
+*/
 
-function AdvertPage({ ...rest }: AdvertsPageProps) {
+function AdvertPage() {
   const [adverts, setAdverts] = useState<Advert[]>([]);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function AdvertPage({ ...rest }: AdvertsPageProps) {
   }, []);
 
   return (
-    <Layout title="What are you thinking?!" {...rest}>
+    <Layout title="What are you thinking?!">
       <div>
         <h1>Anuncios disponibles</h1>
         <ul>
