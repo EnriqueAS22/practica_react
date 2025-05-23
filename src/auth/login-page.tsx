@@ -1,6 +1,9 @@
+import "./login-page.css";
 import { useState } from "react";
 import { login } from "./service";
 import { useAuth } from "./context";
+import Button from "../components/ui/button";
+import FormField from "../components/ui/form-field";
 
 function LoginPage() {
   const { onLogin } = useAuth();
@@ -9,7 +12,7 @@ function LoginPage() {
     password: "1234",
   });
   const { email, password } = credentials;
-  const disabled = !email || !password;
+  const isDisabled = !email || !password;
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
@@ -30,30 +33,31 @@ function LoginPage() {
   }
 
   return (
-    <div>
-      <h1>Logéate!</h1>
+    <div className="login-page">
+      <h1 className="login-page-title">Logéate!</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" disabled={disabled}>
+        <FormField
+          type="email"
+          name="email"
+          label="email"
+          value={email}
+          onChange={handleChange}
+        />
+        <FormField
+          type="password"
+          name="password"
+          label="password"
+          value={password}
+          onChange={handleChange}
+        />
+        <Button
+          className="login-form-submit"
+          disabled={isDisabled}
+          type="submit"
+          $variant="primary"
+        >
           Log in!
-        </button>
+        </Button>
       </form>
     </div>
   );

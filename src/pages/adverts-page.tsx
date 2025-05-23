@@ -1,18 +1,19 @@
-import styles from "./adverts-page.module.css";
+import "./adverts-page.css";
 import { getLatestAdverts } from "../api/service";
 import { useEffect, useState } from "react";
 import type { Advert } from "../api/types";
-import Page from "../components/page";
-import clsx from "clsx";
-import Button from "../assets/button";
+import Button from "../components/ui/button";
+import AdvertItem from "./advert-item";
+import Page from "../components/layout/page";
 
-/* 
-interface AdvertsPageProps {
-  active: boolean;
-} 
-*/
+const EmptyList = () => (
+  <div className="adverts-page-empty">
+    <p>Be the first one!</p>
+    <Button $variant="primary">Create advert</Button>
+  </div>
+);
 
-function AdvertPage() {
+function AdvertsPage() {
   const [adverts, setAdverts] = useState<Advert[]>([]);
 
   useEffect(() => {
@@ -24,26 +25,22 @@ function AdvertPage() {
   }, []);
 
   return (
-    <Page title="What are you thinking?!">
-      <div className={clsx(styles["adverts-page"])}>
-        <h1>Anuncios disponibles</h1>
-        <ul>
-          {adverts.map((ad) => (
-            <li key={ad.id}>
-              <strong>{ad.name}</strong> - {ad.price}€
-              <span>
-                {ad.sale ? "En venta" : "Se compra"} | Tags:{" "}
-                {ad.tags.join(", ")}
-              </span>
-            </li>
-          ))}
-        </ul>
-        <Button disabled={true} $variant="secondary">
-          hola
-        </Button>
+    <Page title="Heeeey! I'm Layout">
+      <div className="adverts-page">
+        {adverts.length ? (
+          <ul>
+            {adverts.map((advert) => (
+              <li key={advert.id}>
+                <AdvertItem advert={advert} />
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <EmptyList />
+        )}
       </div>
     </Page>
   );
 }
 
-export default AdvertPage;
+export default AdvertsPage;

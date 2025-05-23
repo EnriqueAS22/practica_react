@@ -1,17 +1,20 @@
 import LoginPage from "./auth/login-page";
-import Layout from "./components/layout";
-import AdvertPage from "./pages/adverts-page";
+import Layout from "./components/layout/layout";
+import AdvertsPage from "./pages/adverts-page";
 import { Navigate, Route, Routes } from "react-router";
+import NewAdvertPage from "./pages/new-advert-page";
 
 function App() {
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
+
       <Route path="/adverts" element={<Layout />}>
-        <Route index element={<AdvertPage />} />
-        {/* <Route path=":advertId" element={<AdvertPage />} /> */}
-        {/*<Route path="new" element={<NewAdvertPage />} />*/}
+        <Route index element={<AdvertsPage />} />
+        <Route path=":advertId" element={<AdvertsPage />} />
+        <Route path="new" element={<NewAdvertPage />} />
       </Route>
+
       <Route path="/" element={<Navigate to="/adverts" />} />
       <Route path="/404" element={<div>404 | Not Found</div>} />
       <Route path="*" element={<Navigate to="/404" />} />
