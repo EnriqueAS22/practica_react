@@ -7,7 +7,7 @@ interface AdvertItemProps {
 }
 
 const AdvertItem = ({ advert }: AdvertItemProps) => {
-  const { user, name } = advert;
+  const { name } = advert;
   return (
     <article className="advert-item">
       <div>
