@@ -1,7 +1,10 @@
+import styles from "./adverts-page.module.css";
 import { getLatestAdverts } from "../api/service";
 import { useEffect, useState } from "react";
 import type { Advert } from "../api/types";
 import Page from "../components/page";
+import clsx from "clsx";
+import Button from "../assets/button";
 
 /* 
 interface AdvertsPageProps {
@@ -22,7 +25,7 @@ function AdvertPage() {
 
   return (
     <Page title="What are you thinking?!">
-      <div>
+      <div className={clsx(styles["adverts-page"])}>
         <h1>Anuncios disponibles</h1>
         <ul>
           {adverts.map((ad) => (
@@ -35,6 +38,9 @@ function AdvertPage() {
             </li>
           ))}
         </ul>
+        <Button disabled={true} $variant="secondary">
+          hola
+        </Button>
       </div>
     </Page>
   );

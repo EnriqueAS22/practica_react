@@ -9,6 +9,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/adverts" element={<Layout />}>
         <Route index element={<AdvertPage />} />
+        {/* <Route path=":advertId" element={<AdvertPage />} /> */}
         {/*<Route path="new" element={<NewAdvertPage />} />*/}
       </Route>
       <Route path="/" element={<Navigate to="/adverts" />} />
