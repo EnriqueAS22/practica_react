@@ -4,15 +4,24 @@ import { login } from "./service";
 import { useAuth } from "./context";
 import Button from "../components/ui/button";
 import FormField from "../components/ui/form-field";
+import { useLocation, useNavigate } from "react-router";
+import { AxiosError } from "axios";
 
 function LoginPage() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const { onLogin } = useAuth();
   const [credentials, setCredentials] = useState({
     email: "user@mail.com",
     password: "1234",
   });
+
+  const [error, setError] = useState<{ message: string } | null>(null);
+  const [isFetching, setIsFetching] = useState(false);
+
   const { email, password } = credentials;
-  const isDisabled = !email || !password;
+  const isDisabled = !email || !password || isFetching;
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     setCredentials((prevCredentials) => ({
@@ -25,10 +34,18 @@ function LoginPage() {
     event.preventDefault();
 
     try {
+      setIsFetching(true);
       await login(credentials);
       onLogin();
+      //Navigate to -
+      const to = location.state?.from ?? "/";
+      navigate(to, { replace: true });
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        setError({ message: error.response?.data?.message ?? "" });
+      }
+    } finally {
+      setIsFetching(false);
     }
   }
 
@@ -59,6 +76,17 @@ function LoginPage() {
           Log in!
         </Button>
       </form>
+      {error && (
+        <div
+          className="login-page-error"
+          role="alert"
+          onClick={() => {
+            setError(null);
+          }}
+        >
+          {error.message}
+        </div>
+      )}
     </div>
   );
 }

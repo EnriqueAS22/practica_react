@@ -16,7 +16,7 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
       <div className="right">
         <div className="advert-item-header">
           <span className="advert-item-name">{"Desconocido"}</span>
-          <span className="advert-item-separator">·</span>
+          <span className="advert-item-separator"></span>
         </div>
         <div>
           {name}

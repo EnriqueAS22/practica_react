@@ -3,6 +3,8 @@ import Layout from "./components/layout/layout";
 import AdvertsPage from "./pages/adverts-page";
 import { Navigate, Route, Routes } from "react-router";
 import NewAdvertPage from "./pages/new-advert-page";
+import RequiredAuth from "./auth/required-auth";
+import AdvertPage from "./pages/advert-page";
 
 function App() {
   return (
@@ -11,8 +13,15 @@ function App() {
 
       <Route path="/adverts" element={<Layout />}>
         <Route index element={<AdvertsPage />} />
-        <Route path=":advertId" element={<AdvertsPage />} />
-        <Route path="new" element={<NewAdvertPage />} />
+        <Route path=":advertId" element={<AdvertPage />} />
+        <Route
+          path="new"
+          element={
+            <RequiredAuth>
+              <NewAdvertPage />
+            </RequiredAuth>
+          }
+        />
       </Route>
 
       <Route path="/" element={<Navigate to="/adverts" />} />

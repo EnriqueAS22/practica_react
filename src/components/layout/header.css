@@ -27,6 +27,8 @@
   display: flex;
   justify-content: flex-end;
   flex: 1;
+  align-items: center;
+  gap: 10px;
 }
 .header-nav .header-nav-item {
   align-self: center;

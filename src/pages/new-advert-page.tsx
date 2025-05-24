@@ -1,14 +1,14 @@
 import "./new-advert-page.css";
-import Layout from "../components/layout/layout";
 import Button from "../components/ui/button";
 import Photo from "../components/ui/photo";
 import Textarea from "../components/ui/textarea";
+import Page from "../components/layout/page";
 
 const MAX_CHARACTERS = 140;
 
 function NewAdvertPage() {
   return (
-    <Layout title="What are you thinking?">
+    <Page title="What are you thinking?">
       <div className="new-advert-page">
         <div>
           <Photo />
@@ -31,7 +31,7 @@ function NewAdvertPage() {
           </div>
         </form>
       </div>
-    </Layout>
+    </Page>
   );
 }
 

@@ -1,6 +1,7 @@
 import { logout } from "../auth/service";
 import { useAuth } from "../auth/context";
 import Button from "../components/ui/button";
+import { Link } from "react-router";
 
 export default function AuthButton() {
   const { isLogged, onLogout } = useAuth();
@@ -13,6 +14,8 @@ export default function AuthButton() {
       Logout
     </Button>
   ) : (
-    <button>Login</button>
+    <Button $variant="primary" as={Link} to="/login">
+      Login
+    </Button>
   );
 }
