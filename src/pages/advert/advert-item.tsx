@@ -7,7 +7,7 @@ interface AdvertItemProps {
 }
 
 const AdvertItem = ({ advert }: AdvertItemProps) => {
-  const { name } = advert;
+  const { name, sale, price, tags } = advert;
   return (
     <article className="advert-item">
       <div>
@@ -20,6 +20,18 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
         </div>
         <div>
           {name}
+          <div className="advert-item-actions"></div>
+        </div>
+        <div>
+          {sale}
+          <div className="advert-item-actions"></div>
+        </div>
+        <div>
+          {price}
+          <div className="advert-item-actions"></div>
+        </div>
+        <div>
+          {tags}
           <div className="advert-item-actions"></div>
         </div>
       </div>

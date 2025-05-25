@@ -27,7 +27,8 @@ function AdvertPage() {
 
   return (
     <Page title="Advert Detail">
-      Advert Detail {params.advertId}-{advert?.name}
+      Advert Detail {params.advertId}-{advert?.name}-{advert?.sale}-
+      {advert?.price}-{advert?.tags}
     </Page>
   );
 }
