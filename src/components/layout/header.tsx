@@ -1,5 +1,5 @@
 import "./header.css";
-import AuthButton from "../../auth/auth-button";
+import AuthButton from "../../pages/auth/auth-button";
 import { Link, NavLink } from "react-router";
 
 function Header() {

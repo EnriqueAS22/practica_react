@@ -1,10 +1,10 @@
-import LoginPage from "./auth/login-page";
+import LoginPage from "./pages/auth/login-page";
 import Layout from "./components/layout/layout";
-import AdvertsPage from "./pages/adverts-page";
+import AdvertsPage from "./pages/advert/adverts-page";
 import { Navigate, Route, Routes } from "react-router";
-import NewAdvertPage from "./pages/new-advert-page";
-import RequiredAuth from "./auth/required-auth";
-import AdvertPage from "./pages/advert-page";
+import NewAdvertPage from "./pages/advert/new-advert-page";
+import RequiredAuth from "./pages/auth/required-auth";
+import AdvertPage from "./pages/advert/advert-page";
 
 function App() {
   return (

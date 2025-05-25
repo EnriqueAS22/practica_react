@@ -1,10 +1,10 @@
 import "./adverts-page.css";
-import { getLatestAdverts } from "../api/service";
+import { getLatestAdverts } from "../../api/service";
 import { useEffect, useState } from "react";
-import type { Advert } from "../api/types";
-import Button from "../components/ui/button";
+import type { Advert } from "../../api/types";
+import Button from "../../components/ui/button";
 import AdvertItem from "./advert-item";
-import Page from "../components/layout/page";
+import Page from "../../components/layout/page";
 import { Link } from "react-router";
 
 const EmptyList = () => (

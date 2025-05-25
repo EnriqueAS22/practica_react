@@ -1,6 +1,6 @@
 import "./advert-item.css";
-import Photo from "../components/ui/photo";
-import type { Advert } from "../api/types";
+import Photo from "../../components/ui/photo";
+import type { Advert } from "../../api/types";
 
 interface AdvertItemProps {
   advert: Advert;

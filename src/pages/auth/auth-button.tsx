@@ -1,6 +1,6 @@
 import { logout } from "../auth/service";
 import { useAuth } from "../auth/context";
-import Button from "../components/ui/button";
+import Button from "../../components/ui/button";
 import { Link } from "react-router";
 
 export default function AuthButton() {

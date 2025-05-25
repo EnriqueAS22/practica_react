@@ -2,8 +2,8 @@ import "./login-page.css";
 import { useState } from "react";
 import { login } from "./service";
 import { useAuth } from "./context";
-import Button from "../components/ui/button";
-import FormField from "../components/ui/form-field";
+import Button from "../../components/ui/button";
+import FormField from "../../components/ui/form-field";
 import { useLocation, useNavigate } from "react-router";
 import { AxiosError } from "axios";
 
@@ -42,7 +42,9 @@ function LoginPage() {
       navigate(to, { replace: true });
     } catch (error) {
       if (error instanceof AxiosError) {
-        setError({ message: error.response?.data?.message ?? "" });
+        setError({
+          message: error.response?.data?.message ?? error.message ?? "",
+        });
       }
     } finally {
       setIsFetching(false);
