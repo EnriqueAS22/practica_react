@@ -1,9 +1,9 @@
 import "./adverts-page.css";
-import { getLatestAdverts } from "../../api/service";
+import { getLatestAdverts } from "./service";
 import { useEffect, useState } from "react";
-import type { Advert } from "../../api/types";
+import type { Advert } from "./types";
 import Button from "../../components/ui/button";
-import AdvertItem from "./advert-item";
+import AdvertItem from "../../components/ui/advert-item";
 import Page from "../../components/layout/page";
 import { Link } from "react-router";
 

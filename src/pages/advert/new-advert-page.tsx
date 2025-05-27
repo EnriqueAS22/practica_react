@@ -1,12 +1,12 @@
 import "./new-advert-page.css";
 import { useState, type FormEvent } from "react";
-import { createAdvert } from "../../api/service";
+import { createAdvert } from "./service";
 import Page from "../../components/layout/page";
 import Button from "../../components/ui/button";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
+import { AxiosError } from "axios";
 
 export default function NewAdvertPage() {
-  const location = useLocation();
   const navigate = useNavigate();
   const [formState, setFormState] = useState({
     name: "",
@@ -48,11 +48,14 @@ export default function NewAdvertPage() {
         data.append("photo", file);
       }
 
-      await createAdvert(formData);
-      const to = location.state?.from ?? "/";
-      navigate(to, { replace: true });
+      const createdAdvert = await createAdvert(formData);
+      navigate(`/aderts/${createdAdvert.id}`);
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        if (error.status === 401) {
+          navigate("/login", { replace: true });
+        }
+      }
     }
   };
 

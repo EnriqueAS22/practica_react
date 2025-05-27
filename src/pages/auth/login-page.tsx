@@ -13,14 +13,15 @@ function LoginPage() {
 
   const { onLogin } = useAuth();
   const [credentials, setCredentials] = useState({
-    email: "user@mail.com",
-    password: "1234",
+    email: "",
+    password: "",
+    remember: false,
   });
 
   const [error, setError] = useState<{ message: string } | null>(null);
   const [isFetching, setIsFetching] = useState(false);
 
-  const { email, password } = credentials;
+  const { email, password, remember } = credentials;
   const isDisabled = !email || !password || isFetching;
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -69,6 +70,25 @@ function LoginPage() {
           value={password}
           onChange={handleChange}
         />
+        <div className="flex items-center">
+          <input
+            id="remember"
+            type="checkbox"
+            name="remember"
+            checked={remember}
+            onChange={(event) =>
+              setCredentials({
+                email,
+                password,
+                remember: event.target.checked,
+              })
+            }
+            className="border-border text-primary focus:ring-primary h-4 w-4 rounded"
+          />
+          <label htmlFor="remember" className="text-text ml-2 block text-sm">
+            Remember
+          </label>
+        </div>
         <Button
           className="login-form-submit"
           disabled={isDisabled}

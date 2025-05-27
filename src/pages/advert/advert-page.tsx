@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from "react-router";
 import Page from "../../components/layout/page";
 import { useEffect, useState } from "react";
-import type { Advert } from "../../api/types";
-import { getAdvert } from "../../api/service";
+import type { Advert } from "./types";
+import { getAdvert } from "./service";
 import { AxiosError } from "axios";
 
 function AdvertPage() {

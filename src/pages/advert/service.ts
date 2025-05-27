@@ -1,4 +1,4 @@
-import { client } from "../api/client";
+import { client } from "../../api/client";
 import type { Advert } from "./types";
 
 const ADVERTS_URL = "/v1/adverts";
