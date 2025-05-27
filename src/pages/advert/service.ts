@@ -18,3 +18,13 @@ export const createAdvert = async (formData: FormData) => {
   const response = await client.post<Advert>(ADVERTS_URL, formData);
   return response.data;
 };
+
+export const deleteAdvert = async (AdvertId: string) => {
+  const response = await client.get(`/api/v1/adverts/${AdvertId}`);
+  return response.data;
+};
+
+export const getTags = async () => {
+  const response = await client.get("/api/v1/adverts/tags");
+  return response.data;
+};
