@@ -49,7 +49,6 @@ function AdvertPage() {
   return (
     <Page title="Advert Detail">
       <div>
-        Advert Detail
         <div className="advert-image">
           <img
             src={advert?.photo ? `${advert.photo}` : "/placeholder.png"}
@@ -61,15 +60,32 @@ function AdvertPage() {
             }}
           />
         </div>
-        {params.advertId}
+        User id: {params.advertId}
         <br />
-        {advert?.name}
+        <h2>{advert?.name}</h2>
         <br />
-        {advert?.sale}
+        <span
+          className={`rounded-full px-2 py-1 text-xs font-semibold ${
+            advert?.sale
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {advert?.sale ? "Sale" : "Buy"}
+        </span>
         <br />
-        {advert?.price}
+        <p className="mb-2 text-sm text-gray-700">Precio: {advert?.price}€</p>
         <br />
-        {advert?.tags}
+        <div className="flex flex-wrap gap-2">
+          {advert?.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
         <Button
           $variant="secondary"
           onClick={handleDelete}
