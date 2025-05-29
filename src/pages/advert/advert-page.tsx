@@ -50,6 +50,17 @@ function AdvertPage() {
     <Page title="Advert Detail">
       <div>
         Advert Detail
+        <div className="advert-image">
+          <img
+            src={advert?.photo ? `${advert.photo}` : "/placeholder.png"}
+            alt={advert?.name}
+            style={{
+              maxWidth: "300px",
+              marginBottom: "1rem",
+              borderRadius: "10px",
+            }}
+          />
+        </div>
         {params.advertId}
         <br />
         {advert?.name}

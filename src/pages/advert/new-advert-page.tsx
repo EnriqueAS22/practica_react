@@ -4,7 +4,6 @@ import Page from "../../components/layout/page";
 import Button from "../../components/ui/button";
 import { useNavigate } from "react-router";
 import { AxiosError } from "axios";
-import FormField from "../../components/ui/form-field";
 import { useState } from "react";
 
 export default function NewAdvertPage() {
