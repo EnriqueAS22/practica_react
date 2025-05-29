@@ -2,17 +2,27 @@ import "./adverts-page.css";
 import { getLatestAdverts, getTags } from "./service";
 import { useEffect, useState } from "react";
 import type { Advert, Tag } from "./types";
-import Button from "../../components/ui/button";
 import AdvertItem from "../../components/ui/advert-item";
 import Page from "../../components/layout/page";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import Button from "../../components/ui/button";
 
-const EmptyList = () => (
-  <div className="adverts-page-empty">
-    <p>Be the first one!</p>
-    <Button $variant="primary">Create advert</Button>
-  </div>
-);
+const EmptyList = () => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/adverts/new");
+  };
+
+  return (
+    <div className="adverts-page-empty">
+      <p>Be the first one!</p>
+      <Button $variant="primary" onClick={handleClick}>
+        Create advert
+      </Button>
+    </div>
+  );
+};
 
 function AdvertsPage() {
   const [adverts, setAdverts] = useState<Advert[]>([]);
