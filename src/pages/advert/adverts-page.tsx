@@ -38,7 +38,6 @@ function AdvertsPage() {
 
   useEffect(() => {
     getLatestAdverts().then((data) => {
-      console.log("Ejemplo de advert:", data[0]);
       setAdverts(data);
       setFilterAdverts(data);
     });
