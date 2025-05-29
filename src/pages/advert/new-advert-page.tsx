@@ -1,28 +1,30 @@
 import "./new-advert-page.css";
-import { useState, type FormEvent } from "react";
 import { createAdvert } from "./service";
 import Page from "../../components/layout/page";
 import Button from "../../components/ui/button";
 import { useNavigate } from "react-router";
 import { AxiosError } from "axios";
+import FormField from "../../components/ui/form-field";
+import { useState } from "react";
 
 export default function NewAdvertPage() {
   const navigate = useNavigate();
-  const [formState, setFormState] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     price: "",
     sale: "",
     tags: [] as string[],
+    photo: null as File | null,
   });
 
   const isFromDisabled =
-    formState.name ||
-    formState.price ||
-    formState.sale ||
-    formState.tags.length >= 0;
+    formData.name ||
+    formData.price ||
+    formData.sale ||
+    formData.tags.length >= 0;
 
   const handleTagToggle = (tag: string) => {
-    setFormState((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       tags: prev.tags.includes(tag)
         ? prev.tags.filter((t) => t !== tag)
@@ -30,30 +32,32 @@ export default function NewAdvertPage() {
     }));
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] ?? null;
+    setFormData((prev) => ({ ...prev, photo: file }));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     try {
-      const formData = new FormData(event.target as HTMLFormElement);
-
       const data = new FormData();
-      data.append("name", formState.name);
-      data.append("sale", formState.sale);
-      data.append("price", formState.price);
-
-      formState.tags.forEach((tag) => data.append("tags", tag));
-
-      const file = formData.get("photo") as File;
-      if (file && file.size > 0) {
-        data.append("photo", file);
+      data.append("name", formData.name);
+      data.append("sale", formData.sale.toString());
+      data.append("price", formData.price.toString());
+      formData.tags.forEach((tag) => data.append("tags", tag));
+      if (formData.photo) {
+        data.append("photo", formData.photo);
       }
 
-      const createdAdvert = await createAdvert(formData);
+      const createdAdvert = await createAdvert(data);
       navigate(`/aderts/${createdAdvert.id}`);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.status === 401) {
           navigate("/login", { replace: true });
+        } else {
+          console.error("No se pudo crear...", error);
         }
       }
     }
@@ -63,6 +67,29 @@ export default function NewAdvertPage() {
     <Page title="Create Advert">
       <div className="new-advert-page">
         <form onSubmit={handleSubmit} className="new-advert-page-form">
+          <div className="form-label">
+            <label className="form-field-label">
+              <span>Foto (opcional)</span>
+              <input
+                type="file"
+                name="photo"
+                accept="image/*"
+                onChange={handlePhotoChange}
+                className="form-field-input"
+              />
+            </label>
+          </div>
+
+          {formData.photo && (
+            <div className="photo-preview">
+              <img
+                src={URL.createObjectURL(formData.photo)}
+                alt="Preview"
+                style={{ maxWidth: "200px", marginTop: "1rem" }}
+              />
+            </div>
+          )}
+
           <div className="new-advert-page-textarea">
             <label htmlFor="name">Name</label>
             <input
@@ -70,9 +97,9 @@ export default function NewAdvertPage() {
               name="name"
               type="text"
               required
-              value={formState.name}
+              value={formData.name}
               onChange={(event) =>
-                setFormState((prev) => ({ ...prev, name: event.target.value }))
+                setFormData((prev) => ({ ...prev, name: event.target.value }))
               }
             />
           </div>
@@ -84,9 +111,9 @@ export default function NewAdvertPage() {
                 type="radio"
                 required
                 value="true"
-                checked={formState.sale === "true"}
+                checked={formData.sale === "true"}
                 onChange={() =>
-                  setFormState((prev) => ({
+                  setFormData((prev) => ({
                     ...prev,
                     sale: "true",
                   }))
@@ -100,9 +127,9 @@ export default function NewAdvertPage() {
                 type="radio"
                 required
                 value="false"
-                checked={formState.sale === "false"}
+                checked={formData.sale === "false"}
                 onChange={() =>
-                  setFormState((prev) => ({
+                  setFormData((prev) => ({
                     ...prev,
                     sale: "false",
                   }))
@@ -120,9 +147,9 @@ export default function NewAdvertPage() {
               type="number"
               step="0.01"
               required
-              value={formState.price}
+              value={formData.price}
               onChange={(event) =>
-                setFormState((prev) => ({ ...prev, price: event.target.value }))
+                setFormData((prev) => ({ ...prev, price: event.target.value }))
               }
             />
           </div>
@@ -136,7 +163,7 @@ export default function NewAdvertPage() {
                     type="checkbox"
                     name="tags"
                     value={tag}
-                    checked={formState.tags.includes(tag)}
+                    checked={formData.tags.includes(tag)}
                     onChange={() => handleTagToggle(tag)}
                   />
                   {tag}
