@@ -50,7 +50,8 @@ export default function NewAdvertPage() {
       }
 
       const createdAdvert = await createAdvert(data);
-      navigate(`/aderts/${createdAdvert.id}`);
+      console.log(createdAdvert);
+      navigate(`/adverts/${createdAdvert.id}`);
     } catch (error) {
       if (error instanceof AxiosError) {
         if (error.status === 401) {
