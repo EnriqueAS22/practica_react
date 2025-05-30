@@ -8,10 +8,10 @@ interface AdvertItemProps {
 const AdvertItem = ({ advert }: AdvertItemProps) => {
   const { name, sale, price, tags } = advert;
   return (
-    <article className="flex gap-4 rounded-xl border border-gray-200 bg-white p-4 shadow-md">
-      <div className="flex flex-1 flex-col justify-between">
+    <article className="max-w-sm overflow-hidden rounded shadow-lg">
+      <div className="px-6 py-4">
         <header className="mb-2 flex items-start justify-between">
-          <h2 className="text-lg font-bold text-gray-800">{name}</h2>
+          <div className="mb-2 text-xl font-bold">{name}</div>
           <span
             className={`rounded-full px-2 py-1 text-xs font-semibold ${
               sale ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700"
@@ -27,7 +27,7 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
           {tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-blue-100 px-2 py-1 text-xs text-blue-800"
+              className="mr-2 mb-2 inline-block rounded-full bg-gray-200 px-3 py-1 text-sm font-semibold text-gray-700"
             >
               {tag}
             </span>

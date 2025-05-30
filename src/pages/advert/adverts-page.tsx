@@ -36,16 +36,6 @@ function AdvertsPage() {
     selectedTags: [] as string[],
   });
 
-  /*
-  useEffect(() => {
-    async function getAdverts() {
-      const adverts = await getLatestAdverts();
-      setAdverts(adverts);
-    }
-    getAdverts();
-  }, []);
-  */
-
   useEffect(() => {
     getLatestAdverts().then((data) => {
       setAdverts(data);
@@ -89,28 +79,41 @@ function AdvertsPage() {
   };
 
   return (
-    <Page title="GET PRODUCTS!">
+    <Page title="">
       <div className="adverts-page">
         {/* Filtros */}
 
         <div className="dark:bg-dark-background space-y-6 rounded bg-white p-6 shadow-sm">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <input
-              type="text"
-              placeholder="name adverts filter"
-              value={filters.name}
-              onChange={(e) => setFilters({ ...filters, name: e.target.value })}
-            />
-            <select
-              value={filters.sale}
-              onChange={(e) => setFilters({ ...filters, sale: e.target.value })}
-            >
-              <option value="all">Sale and Buy</option>
-              <option value="true">Sale</option>
-              <option value="false">Buy</option>
-            </select>
-            <div>
-              <label htmlFor="">
+          <div className="mb-4 flex">
+            <div className="h-12 w-1/3 bg-white">
+              <label className="mb-2 block text-sm font-bold text-gray-700">
+                Name Filter
+              </label>
+              <input
+                type="text"
+                placeholder="..."
+                value={filters.name}
+                className="mb-2 block text-sm font-bold text-gray-700"
+                onChange={(e) =>
+                  setFilters({ ...filters, name: e.target.value })
+                }
+              />
+            </div>
+            <div className="h-12 w-1/3 bg-white">
+              <select
+                className="mb-2 block text-sm font-bold text-gray-700"
+                value={filters.sale}
+                onChange={(e) =>
+                  setFilters({ ...filters, sale: e.target.value })
+                }
+              >
+                <option value="all">Sale and Buy</option>
+                <option value="true">Sale</option>
+                <option value="false">Buy</option>
+              </select>
+            </div>
+            <div className="h-12 w-1/3 bg-white">
+              <label className="mb-2 block text-sm font-bold text-gray-700">
                 Price Range: {filters.priceRange[0]} - {filters.priceRange[1]}
               </label>
               <div>
@@ -145,7 +148,9 @@ function AdvertsPage() {
           </div>
 
           <fieldset>
-            <legend className="mb-2 text-lg font-semibold">Tags</legend>
+            <legend className="mb-2 block text-sm font-bold text-gray-700">
+              Tags
+            </legend>
             <div className="mb-4 flex flex-wrap gap-4">
               {tags.map((tag) => (
                 <label
@@ -166,26 +171,12 @@ function AdvertsPage() {
           </fieldset>
         </div>
 
-        {/*{adverts.length ? (
-          <ul>
-            {adverts.map((advert) => (
-              <li key={advert.id}>
-                <Link to={`/adverts/${advert.id}`}>
-                  <AdvertItem advert={advert} />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <EmptyList />
-        )}*/}
-
         {filterAdverts.length ? (
-          <ul className="space-y-4">
+          <ul>
             {filterAdverts.map((advert) => (
               <li
                 key={advert.id}
-                className="border-border dark:border-dark-border dark:bg-dark-background rounded-xl border bg-white p-4 shadow-md"
+                className="border-border dark:border-dark-border dark:bg-dark-background rounded-xl bg-white p-4 shadow-md"
               >
                 <Link to={`/adverts/${advert.id}`}>
                   <AdvertItem advert={advert} />
