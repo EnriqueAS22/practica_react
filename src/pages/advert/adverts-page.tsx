@@ -80,7 +80,7 @@ function AdvertsPage() {
 
   return (
     <Page title="">
-      <div className="adverts-page">
+      <div className="mx-auto mt-16 max-w-2xl px-4">
         {/* Filtros */}
 
         <div className="dark:bg-dark-background space-y-6 rounded bg-white p-6 shadow-sm">
@@ -172,12 +172,9 @@ function AdvertsPage() {
         </div>
 
         {filterAdverts.length ? (
-          <ul>
+          <ul className="mt-8 mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {filterAdverts.map((advert) => (
-              <li
-                key={advert.id}
-                className="border-border dark:border-dark-border dark:bg-dark-background rounded-xl bg-white p-4 shadow-md"
-              >
+              <li key={advert.id} className="w-full">
                 <Link to={`/adverts/${advert.id}`}>
                   <AdvertItem advert={advert} />
                 </Link>

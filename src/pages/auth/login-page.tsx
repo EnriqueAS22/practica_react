@@ -3,7 +3,6 @@ import { useState } from "react";
 import { login } from "./service";
 import { useAuth } from "./context";
 import Button from "../../components/ui/button";
-import FormField from "../../components/ui/form-field";
 import { useLocation, useNavigate } from "react-router";
 import { AxiosError } from "axios";
 
@@ -53,23 +52,49 @@ function LoginPage() {
   }
 
   return (
-    <div className="login-page">
-      <h1 className="login-page-title">Logéate!</h1>
-      <form onSubmit={handleSubmit}>
-        <FormField
-          type="email"
-          name="email"
-          label="email"
-          value={email}
-          onChange={handleChange}
-        />
-        <FormField
-          type="password"
-          name="password"
-          label="password"
-          value={password}
-          onChange={handleChange}
-        />
+    <div className="mt-6 flex justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-12 rounded-2xl bg-white p-8 shadow-lg"
+      >
+        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <div className="mt-2">
+              <input
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleChange}
+                className="block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+          <div className="sm:col-span-3">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Password
+            </label>
+            <div className="mt-2">
+              <input
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleChange}
+                className="block w-full rounded-lg border border-gray-300 bg-white px-4 py-2 text-base text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        </div>
         <div className="flex items-center">
           <input
             id="remember"

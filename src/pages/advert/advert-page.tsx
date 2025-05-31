@@ -47,36 +47,42 @@ function AdvertPage() {
   };
 
   return (
-    <Page title="Advert Detail">
-      <div>
-        <div className="advert-image">
-          <img
-            src={advert?.photo ? `${advert.photo}` : "/placeholder.png"}
-            alt={advert?.name}
-            style={{
-              maxWidth: "300px",
-              marginBottom: "1rem",
-              borderRadius: "10px",
-            }}
-          />
+    <Page title="">
+      <div className="mx-auto mt-16 mb-16 max-w-2xl px-4">
+        <div className="space-y-4 rounded-xl bg-white p-6 shadow-md">
+          <div className="flex justify-center">
+            <img
+              src={advert?.photo ? `${advert.photo}` : "/placeholder.png"}
+              alt={advert?.name}
+              className="max-w-xs rounded-xl"
+            />
+          </div>
         </div>
-        User id: {params.advertId}
+        <div className="text-center text-sm text-gray-500">
+          {params.advertId}
+        </div>
         <br />
-        <h2>{advert?.name}</h2>
+        <h2 className="text-center text-2xl font-semibold text-gray-900">
+          {advert?.name}
+        </h2>
         <br />
-        <span
-          className={`rounded-full px-2 py-1 text-xs font-semibold ${
-            advert?.sale
-              ? "bg-green-100 text-green-700"
-              : "bg-red-100 text-red-700"
-          }`}
-        >
-          {advert?.sale ? "Sale" : "Buy"}
-        </span>
+        <div className="text-center">
+          <span
+            className={`rounded-full px-2 py-1 text-xs font-semibold ${
+              advert?.sale
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {advert?.sale ? "Sale" : "Buy"}
+          </span>
+        </div>
         <br />
-        <p className="mb-2 text-sm text-gray-700">Precio: {advert?.price}€</p>
+        <p className="text-center text-lg font-medium text-gray-800">
+          {advert?.price}€
+        </p>
         <br />
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap justify-center gap-2">
           {advert?.tags.map((tag) => (
             <span
               key={tag}
@@ -86,13 +92,16 @@ function AdvertPage() {
             </span>
           ))}
         </div>
-        <Button
-          $variant="secondary"
-          onClick={handleDelete}
-          className="delete-button"
-        >
-          Delete Advert!
-        </Button>
+
+        <div className="mt-6 flex justify-center">
+          <Button
+            $variant="secondary"
+            onClick={handleDelete}
+            className="delete-button"
+          >
+            Delete Advert!
+          </Button>
+        </div>
       </div>
     </Page>
   );
