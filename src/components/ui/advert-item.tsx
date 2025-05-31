@@ -21,7 +21,7 @@ const AdvertItem = ({ advert }: AdvertItemProps) => {
           </span>
         </header>
 
-        <p className="mb-2 text-sm text-gray-700">Precio: {price}€</p>
+        <p className="mb-2 text-sm text-gray-700">{price}€</p>
 
         <div className="flex flex-wrap gap-2">
           {tags.map((tag) => (

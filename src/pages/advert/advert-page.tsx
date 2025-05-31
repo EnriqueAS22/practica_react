@@ -6,10 +6,12 @@ import type { Advert } from "./types";
 import { deleteAdvert, getAdvert } from "./service";
 import { AxiosError } from "axios";
 import Button from "../../components/ui/button";
+import ConfirmModal from "../../components/ui/confirm-modal";
 
 function AdvertPage() {
   const params = useParams();
   const [advert, setAdvert] = useState<Advert | null>(null);
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,9 +30,7 @@ function AdvertPage() {
   }, [params.advertId, navigate]);
 
   const handleDelete = async () => {
-    const confirmed = window.confirm("ESTAS SEGURO????");
-
-    if (!confirmed || !advert) return;
+    if (!advert) return;
 
     try {
       await deleteAdvert(advert.id);
@@ -96,12 +96,22 @@ function AdvertPage() {
         <div className="mt-6 flex justify-center">
           <Button
             $variant="secondary"
-            onClick={handleDelete}
+            onClick={() => setShowConfirmDelete(true)}
             className="delete-button"
           >
             Delete Advert!
           </Button>
         </div>
+        {showConfirmDelete && (
+          <ConfirmModal
+            message="Are you sure do you want to delete this advert?"
+            onConfirm={() => {
+              setShowConfirmDelete(false);
+              handleDelete();
+            }}
+            onCancel={() => setShowConfirmDelete(false)}
+          />
+        )}
       </div>
     </Page>
   );
