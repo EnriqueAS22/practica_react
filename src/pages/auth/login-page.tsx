@@ -37,7 +37,6 @@ function LoginPage() {
       setIsFetching(true);
       await login(credentials);
       onLogin();
-      //Navigate to -
       const to = location.state?.from ?? "/";
       navigate(to, { replace: true });
     } catch (error) {
