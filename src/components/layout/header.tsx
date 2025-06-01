@@ -6,7 +6,9 @@ function Header() {
   return (
     <header className="header">
       <Link to="/">
-        <div>NODEPOP</div>
+        <div className="text-5xl font-bold tracking-widest text-indigo-600 uppercase">
+          NODEPOP
+        </div>
       </Link>
       <nav className="header-nav">
         <NavLink to="/adverts/new">New</NavLink>
